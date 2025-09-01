@@ -1,0 +1,41 @@
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slidein {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@keyframes buttonpulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.3); }
+  50%      { box-shadow: 0 0 10px 4px rgba(16, 185, 129, 0.15); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-6px);}
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 0 0 #0ea5e9; }
+  50%      { box-shadow: 0 0 6px 2px #0ea5e9; }
+}
+@keyframes cardpop {
+  0% { transform: translateY(18px) scale(0.95); opacity: 0; }
+  80% { transform: translateY(-7px) scale(1.03);}
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.animate-pop { animation: pop 0.6s cubic-bezier(.27,.43,.41,1.1) both;}
+.animate-fadein { animation: fadein 0.9s 0.1s both;}
+.animate-slidein { animation: slidein 0.9s 0.25s both;}
+.animate-buttonpulse { animation: buttonpulse 1.2s infinite;}
+.animate-float { animation: float 3s ease-in-out infinite;}
+.animate-glow { animation: glow 1.5s infinite;}
+.animate-cardpop { animation: cardpop 0.7s cubic-bezier(.27,.43,.41,1.1) both;}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,125 @@
+.lessonPage {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar main"
+        "footer footer";
+    background-color: #eff6ff;
+}
+
+.video {
+    margin-top: 10vh;
+
+}
+
+nav {
+    top: 0;
+    position: sticky;
+    grid-area: navbar;
+}
+
+aside {
+    top: 53px;
+    position: sticky;
+    align-self: start;
+    height: calc(100vh - 53px - 86px);
+    grid-area: sidebar;
+}
+
+main {
+    grid-area: main;
+    padding-top: 2vh;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+h2 {
+    padding-bottom: 1vh;
+    padding-top: 3vh;
+}
+
+h2 strong {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.1rem;
+    max-width: 50vw;
+}
+
+main ul {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+    list-style-type: disc;
+}
+
+footer {
+    grid-area: footer;
+    padding: 2em;
+}
+
+.sidebar-button {
+    display: none;
+}
+
+.discover {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-right: 25vw;
+}
+
+.discover-text {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.lesson-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.lesson-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.lesson-preview {
+    margin-top: 0px;
+}
+
+@media (max-width: 800px) {
+    .lessonPage {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        position: fixed;
+        width: 300px;
+        display: none;
+    }
+
+    .show-sidebar {
+        display: block;
+    }
+
+    .sidebar-button {
+        display: block;
+    }
+}
