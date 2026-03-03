@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
-import "./App.css";
-import deepakPhoto from "./assets/RACHAKONDA ADITHYA RAM.jpg";
+import Navbar from "../components/Navbar";
+import "../App.css";
+import deepakPhoto from "../assets/RACHAKONDA ADITHYA RAM.jpg";
 
 export default function App() {
   const location = useLocation();

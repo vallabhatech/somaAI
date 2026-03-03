@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import ReactMarkdown from "react-markdown";
-import { db } from "./firebase";
+import { db } from "../services/firebase";
 import { collection, addDoc, getDocs, orderBy, query } from "firebase/firestore";
-
-// Language detection: Hindi (Devanagari), else English
-const detectLang = (text) => /[\u0900-\u097F]/.test(text) ? "hi" : "en";
+import { detectLanguage } from "../utils/language";
+import { apiService } from "../services/api";
 
 export default function ChatbotPage() {
   const { user, loading } = useAuth();
@@ -51,7 +50,7 @@ export default function ChatbotPage() {
 
 function ChatBox({ user, lang, setLang }) {
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hi! I’m SomaAI. What’s your question?" },
+    { role: "assistant", text: "Hi! I'm SomaAI. What's your question?" },
   ]);
   const [input, setInput] = useState("");
   const [aiTyping, setAiTyping] = useState(false);
@@ -92,10 +91,9 @@ function ChatBox({ user, lang, setLang }) {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const detectedLang = detectLang(input);
+    const detectedLang = detectLanguage(input);
     setLang(detectedLang);
 
-    const API_BASE = "https://somaai-jfuq.onrender.com";
     const userMsg = { role: "user", text: input.trim(), lang: detectedLang };
     const newMsgs = [...messages, userMsg];
     setMessages(newMsgs);
@@ -107,25 +105,10 @@ function ChatBox({ user, lang, setLang }) {
     try {
       if (!session_id) {
         // Create new session if first message
-        const res = await fetch(`${API_BASE}/api/session`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ language: detectedLang }),
-        });
-        const data = await res.json();
-        session_id = data.session_id;
+        session_id = await apiService.createSession(detectedLang);
         setSessionId(session_id);
       }
-      const res = await fetch(`${API_BASE}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          session_id,
-          message: input.trim(),
-          language: detectedLang,
-        }),
-      });
-      const data = await res.json();
+      const data = await apiService.sendMessage(session_id, input.trim(), detectedLang);
       let aiMsg;
       if (data.answer_simple) {
         aiMsg = { role: "assistant", text: data.answer_simple };

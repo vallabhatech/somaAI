@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import LessonCard from "./LessonCard";
-import { db } from './firebase';
+import LessonCard from "../components/LessonCard";
+import { db } from '../services/firebase';
 import { getDocs, collection } from 'firebase/firestore';
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Lessons() {
   const [search, setSearch] = useState("");

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Markdown from 'react-markdown';
-import { db } from './firebase';
+import { db } from '../services/firebase';
 import { getDoc, getDocs, collection, doc } from 'firebase/firestore';
-import LessonCard from './LessonCard';
-import './LessonPage.css';
-import Navbar from "./Navbar";
+import LessonCard from '../components/LessonCard';
+import "../LessonPage.css";
+import Navbar from "../components/Navbar";
 import Youtube from "react-youtube";
 
 function LessonPage() {
-    const [showSidebar, setShowSidebar] = useState(false);
-    const { id } = useParams();
+        const { id } = useParams();
     const [data, setData] = useState();
     const [discoverLessons, setDiscoverLessons] = useState([]);
     const discoverLessonCount = 4;
@@ -43,7 +42,7 @@ function LessonPage() {
         <>
             <Navbar />
             <div className="lessonPage">
-                <aside id="sidebar" className={showSidebar ? 'show-sidebar' : ''} />
+                <aside id="sidebar" className='' />
                 <main>
                     <h1 className='title'>{data.name}</h1>
                     <Markdown>{data.content}</Markdown>

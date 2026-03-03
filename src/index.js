@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
-import Lessons from "./Lessons";
-import LessonPage from "./LessonPage";
-import AIPage from "./AIPage";
-import { AuthProvider } from "./AuthContext";
-import SignInPage from "./SignInPage"; // (make this, see below)
+import App from "./pages/App";
+import Lessons from "./pages/Lessons";
+import LessonPage from "./pages/LessonPage";
+import AIPage from "./pages/AIPage";
+import { AuthProvider } from "./context/AuthContext";
+import SignInPage from "./pages/SignInPage"; // (make this, see below)
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

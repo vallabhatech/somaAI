@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
+import { auth } from "../services/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
